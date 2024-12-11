@@ -94,17 +94,23 @@ public class TerrainGameFX {
         int numSegments = width / segmentWidth;
         int[] heights = new int[numSegments];
         int baseHeight = height - 100; // Flat terrain height
-        int peakHeight = height + 150; // Mountain peak height
+        int peakHeight = height + 300; // Mountain peak height
         int mid = numSegments / 2;
-
+    
+        double baseWidth = 13.0; // Adjust this value to widen the mountain base
+    
         for (int i = 0; i < numSegments; i++) {
-            if (i < mid - 5 || i > mid + 5) {
-                heights[i] = baseHeight; // Flat base
+            int distanceFromCenter = Math.abs(i - mid);
+    
+            if (distanceFromCenter > baseWidth) {
+                // Flat terrain outside the mountain's range
+                heights[i] = baseHeight;
             } else {
-                int distanceFromCenter = Math.abs(i - mid);
-                heights[i] = baseHeight - (int) ((peakHeight - baseHeight) * (1.0 - (distanceFromCenter / 5.0)));
+                // Slope inside the mountain's range
+                heights[i] = baseHeight - (int) ((peakHeight - baseHeight) * (1.0 - (distanceFromCenter / baseWidth)));
             }
         }
         return heights;
     }
+    
 }

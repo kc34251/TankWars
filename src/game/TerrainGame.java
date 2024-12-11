@@ -13,7 +13,7 @@ public class TerrainGame {
 
         // Simulate destruction
         new Timer(1000, e -> {
-            terrainPanel.destroyTerrain((int) (Math.random() * 800), 50);
+            terrainPanel.destroyTerrain((int) (Math.random() * 800), 30);
         }).start();
         
     }
